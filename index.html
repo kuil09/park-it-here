@@ -21,35 +21,27 @@
                 <h2>Saved Parking Location</h2>
                 <div id="location-display">
                     <div id="photo-preview-container">
-                        <img id="saved-photo" alt="Parking location photo" />
+                        <div class="photo-wrapper">
+                            <img id="saved-photo" alt="Parking location photo" />
+                            <button type="button" id="clear-btn" class="btn-remove-overlay" aria-label="Delete Location">✕</button>
+                        </div>
                     </div>
                     <p id="location-time" class="time-stamp"></p>
                 </div>
-                <button id="clear-btn" class="btn btn-danger">Delete Location</button>
             </section>
 
             <!-- Input Form -->
             <section id="input-form" class="card">
                 <h2>Take Parking Location Photo</h2>
-                <form id="parking-form">
-                    <div class="form-group">
-                        <label for="photo-input">📸 Take a photo</label>
-                        <input 
-                            type="file" 
-                            id="photo-input" 
-                            accept="image/*"
-                            capture="environment"
-                            required
-                        />
-                        <div id="photo-preview" class="hidden">
-                            <div class="photo-wrapper">
-                                <img id="preview-img" alt="Preview" />
-                                <button type="button" id="remove-photo" class="btn-remove-overlay" aria-label="Remove Photo">✕</button>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </form>
+                <div class="form-group">
+                    <label for="photo-input">📸 Take a photo</label>
+                    <input 
+                        type="file" 
+                        id="photo-input" 
+                        accept="image/*"
+                        capture="environment"
+                    />
+                </div>
             </section>
         </main>
 

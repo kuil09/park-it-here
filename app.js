@@ -9,17 +9,10 @@
     // DOM Elements
     const savedLocationSection = document.getElementById('saved-location');
     const inputFormSection = document.getElementById('input-form');
-    const parkingForm = document.getElementById('parking-form');
     const photoInput = document.getElementById('photo-input');
-    const photoPreview = document.getElementById('photo-preview');
-    const previewImg = document.getElementById('preview-img');
-    const removePhotoBtn = document.getElementById('remove-photo');
     const locationTime = document.getElementById('location-time');
     const savedPhoto = document.getElementById('saved-photo');
-    const photoPreviewContainer = document.getElementById('photo-preview-container');
     const clearBtn = document.getElementById('clear-btn');
-
-    let currentPhotoData = null;
 
     // Initialize the app
     function init() {
@@ -29,9 +22,7 @@
 
     // Set up event listeners
     function setupEventListeners() {
-        parkingForm.addEventListener('submit', handleFormSubmit);
         photoInput.addEventListener('change', handlePhotoSelect);
-        removePhotoBtn.addEventListener('click', removePhoto);
         clearBtn.addEventListener('click', clearLocation);
     }
 
@@ -68,36 +59,10 @@
     function showInputForm() {
         savedLocationSection.classList.add('hidden');
         inputFormSection.classList.remove('hidden');
-        resetForm();
+        photoInput.value = '';
     }
 
-    // Handle form submission
-    function handleFormSubmit(e) {
-        e.preventDefault();
-
-        if (!currentPhotoData) {
-            alert('Please take a photo of your parking location.');
-            return;
-        }
-
-        const data = {
-            timestamp: new Date().toISOString(),
-            photo: currentPhotoData
-        };
-
-        try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            displaySavedLocation(data);
-        } catch (e) {
-            if (e.name === 'QuotaExceededError') {
-                alert('Storage space is full. Please clear your browser cache.');
-            } else {
-                alert('Failed to save: ' + e.message);
-            }
-        }
-    }
-
-    // Handle photo selection
+    // Handle photo selection - auto-save immediately
     function handlePhotoSelect(e) {
         const file = e.target.files[0];
         if (!file) return;
@@ -108,11 +73,23 @@
             return;
         }
 
-        // Resize and convert to base64
+        // Resize and convert to base64, then save
         resizeImage(file, 800, 600, function(dataUrl) {
-            currentPhotoData = dataUrl;
-            previewImg.src = dataUrl;
-            photoPreview.classList.remove('hidden');
+            const data = {
+                timestamp: new Date().toISOString(),
+                photo: dataUrl
+            };
+
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                displaySavedLocation(data);
+            } catch (e) {
+                if (e.name === 'QuotaExceededError') {
+                    alert('Storage space is full. Please clear your browser cache.');
+                } else {
+                    alert('Failed to save: ' + e.message);
+                }
+            }
         });
     }
 
@@ -147,14 +124,6 @@
         reader.readAsDataURL(file);
     }
 
-    // Remove selected photo
-    function removePhoto() {
-        currentPhotoData = null;
-        photoInput.value = '';
-        previewImg.src = '';
-        photoPreview.classList.add('hidden');
-    }
-
     // Clear saved location
     function clearLocation() {
         if (confirm('Are you sure you want to delete the saved parking location?')) {
@@ -165,14 +134,6 @@
                 alert('Failed to delete.');
             }
         }
-    }
-
-    // Reset form
-    function resetForm() {
-        parkingForm.reset();
-        currentPhotoData = null;
-        photoPreview.classList.add('hidden');
-        previewImg.src = '';
     }
 
     // Format timestamp for display
