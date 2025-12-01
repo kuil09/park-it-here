@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Park It Here - Save Your Parking Location</title>
+    <title>Park It Here - 주차 위치 저장</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4a90d9">
@@ -18,65 +18,141 @@
     <div class="container">
         <header>
             <h1>🚗 Park It Here</h1>
-            <p class="subtitle">Save parking photos locally — no camera roll or cloud storage needed</p>
+            <p class="subtitle">사진을 로컬에만 저장 — 카메라 롤이나 클라우드 불필요</p>
+            <button type="button" id="help-btn" class="btn-help" aria-label="사용 방법">
+                <span class="help-icon">?</span>
+            </button>
         </header>
 
         <main>
+            <!-- Elapsed Time Display (shown after photo capture) -->
+            <section id="elapsed-time-section" class="card elapsed-time-card hidden">
+                <h2>⏱️ 주차 후 경과 시간</h2>
+                <div class="elapsed-time-display">
+                    <span id="elapsed-time" class="elapsed-time-value">00:00:00</span>
+                </div>
+                <p id="parked-at-time" class="parked-at-text"></p>
+            </section>
+
             <!-- Saved Location Display -->
             <section id="saved-location" class="card hidden">
-                <h2>Saved Parking Location</h2>
+                <h2>저장된 주차 위치</h2>
                 <div id="location-display">
                     <div id="photo-preview-container">
                         <div class="photo-wrapper">
-                            <img id="saved-photo" alt="Parking location photo" />
-                            <button type="button" id="clear-btn" class="btn-remove-overlay" aria-label="Delete Location">✕</button>
+                            <img id="saved-photo" alt="주차 위치 사진" />
+                            <button type="button" id="zoom-btn" class="btn-zoom-overlay" aria-label="확대해서 보기">🔍</button>
+                            <button type="button" id="clear-btn" class="btn-remove-overlay" aria-label="삭제">✕</button>
                         </div>
                     </div>
-                    <p id="location-time" class="time-stamp"></p>
                 </div>
             </section>
 
             <!-- Input Form -->
             <section id="input-form" class="card">
-                <h2>Take Parking Location Photo</h2>
-                <div class="form-group">
-                    <label for="photo-input">📸 Take a photo</label>
-                    <input 
-                        type="file" 
-                        id="photo-input" 
-                        accept="image/*"
-                        capture="environment"
-                    />
+                <h2>주차 위치 사진 찍기</h2>
+                <div class="photo-actions">
+                    <button type="button" id="camera-btn" class="btn btn-primary btn-photo-action">
+                        📸 사진 찍기
+                    </button>
+                    <button type="button" id="gallery-btn" class="btn btn-secondary btn-photo-action">
+                        🖼️ 갤러리에서 사진 선택
+                    </button>
                 </div>
+                <!-- Hidden file inputs -->
+                <input 
+                    type="file" 
+                    id="camera-input" 
+                    accept="image/*"
+                    capture="environment"
+                    class="hidden-input"
+                />
+                <input 
+                    type="file" 
+                    id="gallery-input" 
+                    accept="image/*"
+                    class="hidden-input"
+                />
             </section>
         </main>
 
         <!-- Add to Home Screen Instructions -->
         <section id="install-guide" class="card">
-            <h2>📲 Add to Home Screen</h2>
+            <h2>📲 홈 화면에 추가</h2>
             <div class="install-instructions">
                 <details class="install-option">
                     <summary>🍎 iPhone / iPad (iOS)</summary>
                     <ol>
-                        <li>Tap the <strong>Share</strong> button (square with arrow) at the bottom of Safari</li>
-                        <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
-                        <li>Tap <strong>"Add"</strong> in the top right corner</li>
+                        <li>Safari 하단의 <strong>공유</strong> 버튼 (화살표가 있는 사각형)을 탭하세요</li>
+                        <li>아래로 스크롤하여 <strong>"홈 화면에 추가"</strong>를 탭하세요</li>
+                        <li>오른쪽 상단의 <strong>"추가"</strong>를 탭하세요</li>
                     </ol>
                 </details>
                 <details class="install-option">
                     <summary>🤖 Android</summary>
                     <ol>
-                        <li>Tap the <strong>Menu</strong> button (three dots) in Chrome</li>
-                        <li>Tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong></li>
-                        <li>Tap <strong>"Add"</strong> to confirm</li>
+                        <li>Chrome에서 <strong>메뉴</strong> 버튼 (점 세 개)을 탭하세요</li>
+                        <li><strong>"홈 화면에 추가"</strong> 또는 <strong>"앱 설치"</strong>를 탭하세요</li>
+                        <li><strong>"추가"</strong>를 탭하여 확인하세요</li>
                     </ol>
                 </details>
             </div>
         </section>
 
         <footer>
-            <p>📱 Data is stored only on this device</p>
+            <p>📱 데이터는 이 기기에만 저장됩니다</p>
         </footer>
+    </div>
+
+    <!-- How to Use Modal -->
+    <div id="help-modal" class="modal hidden">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button type="button" id="modal-close-btn" class="modal-close-btn" aria-label="닫기">✕</button>
+            <h2>📖 사용 방법</h2>
+            <div class="help-content">
+                <ol class="help-steps">
+                    <li>
+                        <strong>📸 사진 찍기</strong>
+                        <p>주차 위치를 사진으로 촬영하세요. 카메라가 없는 기기에서는 갤러리에서 사진을 선택할 수 있습니다.</p>
+                    </li>
+                    <li>
+                        <strong>💾 자동 저장</strong>
+                        <p>사진이 자동으로 브라우저 로컬 저장소에 저장됩니다. 클라우드나 카메라 롤에 저장되지 않습니다.</p>
+                    </li>
+                    <li>
+                        <strong>⏱️ 경과 시간 확인</strong>
+                        <p>주차 후 경과된 시간이 자동으로 표시됩니다.</p>
+                    </li>
+                    <li>
+                        <strong>🔍 사진 확대</strong>
+                        <p>저장된 사진을 탭하면 크게 볼 수 있습니다.</p>
+                    </li>
+                    <li>
+                        <strong>🗑️ 삭제</strong>
+                        <p>더 이상 필요 없으면 사진 위의 ✕ 버튼을 눌러 삭제하세요.</p>
+                    </li>
+                </ol>
+            </div>
+            <div class="help-footer">
+                <label class="dont-show-again">
+                    <input type="checkbox" id="dont-show-again-checkbox" />
+                    <span>다시 보지 않기</span>
+                </label>
+                <button type="button" id="help-close-btn" class="btn btn-primary">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Zoom Modal -->
+    <div id="zoom-modal" class="modal zoom-modal hidden">
+        <div class="modal-overlay" id="zoom-overlay"></div>
+        <div class="zoom-content">
+            <button type="button" id="zoom-close-btn" class="modal-close-btn" aria-label="닫기">✕</button>
+            <div class="zoom-image-container">
+                <img id="zoom-image" alt="확대된 주차 위치 사진" />
+            </div>
+        </div>
     </div>
 
     <script src="app.js"></script>
