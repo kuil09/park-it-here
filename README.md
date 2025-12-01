@@ -22,53 +22,45 @@ With **Park It Here**:
 - 🔍 **Zoom and enlarge photos** to see details like license plates and location markers
 - 💾 **Keep it local** — the data lives only in your browser's local storage
 - 📖 **First-run guide** with option to hide on subsequent visits
+- 🔄 **Replace photos easily** — take a new photo anytime to update your saved location
 
 Data never leaves your device, and there's no login, account, or sync.
 
 ---
 
-## 📱 사용 방법 (How to use)
-
-1. **페이지 열기**: 모바일이나 데스크톱 브라우저에서 페이지를 엽니다.
-2. **사진 찍기**: "📸 사진 찍기" 버튼을 탭하여 주차 위치 사진을 촬영합니다.
-   - 카메라가 없는 기기에서는 "🖼️ 갤러리에서 사진 선택" 버튼을 사용하세요.
-3. **자동 저장**: 사진이 자동으로 저장되고 화면에 표시됩니다.
-4. **경과 시간 확인**: 주차 후 경과된 시간이 실시간으로 업데이트됩니다.
-   - 90분 이상: 주황색 경고
-   - 2시간 이상: 빨간색 경고
-5. **사진 확대**: 저장된 사진을 탭하거나 🔍 버튼을 눌러 크게 볼 수 있습니다.
-6. **삭제**: 더 이상 필요 없으면 사진 위의 ✕ 버튼을 눌러 삭제하세요.
-7. **사용 방법 보기**: 오른쪽 상단의 ? 버튼을 눌러 사용 방법을 볼 수 있습니다.
-
-### English Summary
+## 📱 How to use
 
 1. **Open the page** in your mobile or desktop browser.
-2. **Take a photo** of your parking location using the "📸 사진 찍기" button.
-   - On devices without camera support, use the gallery selection button.
+2. **Take a photo** of your parking location using the "📸 Take Photo" button.
+   - The photo is saved directly in the browser, not in your camera roll.
 3. The app will **save and show your parking photo** automatically.
 4. **Check elapsed time** displayed prominently at the top.
+   - Over 90 minutes: Orange warning color
+   - Over 2 hours: Red danger color
 5. **Tap the photo** or the zoom icon to see it in full size.
-6. **Delete** when no longer needed using the ✕ button on the photo.
+6. **Take a new photo** anytime — it will replace the existing one.
+7. **Delete** when no longer needed using the ✕ button on the photo.
+8. **View help** anytime by clicking the ? button in the top right corner.
 
 ---
 
-## 📲 홈 화면에 추가 (Add to Home Screen)
+## 📲 Add to Home Screen (optional, but recommended)
 
 You can add Park It Here to your home screen and use it like a lightweight app.
 
 ### 🍎 iPhone / iPad (iOS)
 
-1. Safari에서 Park It Here를 엽니다.
-2. 하단의 **공유** 버튼 (화살표가 있는 사각형)을 탭합니다.
-3. 아래로 스크롤하여 **"홈 화면에 추가"**를 탭합니다.
-4. 오른쪽 상단의 **"추가"**를 탭합니다.
+1. Open Park It Here in **Safari**.
+2. Tap the **Share** button (square with arrow) at the bottom.
+3. Scroll down and tap **"Add to Home Screen"**.
+4. Tap **"Add"** in the top right corner.
 
 ### 🤖 Android (Chrome)
 
-1. Chrome에서 Park It Here를 엽니다.
-2. **메뉴** 버튼 (점 세 개)을 탭합니다.
-3. **"홈 화면에 추가"** 또는 **"앱 설치"**를 탭합니다.
-4. **"추가"**를 탭하여 확인합니다.
+1. Open Park It Here in **Chrome**.
+2. Tap the **Menu** button (three dots).
+3. Tap **"Add to Home screen"** or **"Install app"**.
+4. Tap **"Add"** to confirm.
 
 ---
 
@@ -77,7 +69,7 @@ You can add Park It Here to your home screen and use it like a lightweight app.
 - Your data is stored **only on the current device and browser**.
 - If you **clear your browser data/cache**, the saved parking photo will be deleted.
 - There is **no sync between devices**.
-- The "사용 방법" (How to use) modal appears on first run and can be hidden with the "다시 보지 않기" option.
+- The "How to Use" modal appears on first run and can be hidden with the "Don't show again" option.
 
 ---
 

@@ -17,9 +17,7 @@
     const clearBtn = document.getElementById('clear-btn');
     const zoomBtn = document.getElementById('zoom-btn');
     const cameraBtn = document.getElementById('camera-btn');
-    const galleryBtn = document.getElementById('gallery-btn');
     const cameraInput = document.getElementById('camera-input');
-    const galleryInput = document.getElementById('gallery-input');
     
     // Help Modal Elements
     const helpBtn = document.getElementById('help-btn');
@@ -47,11 +45,9 @@
 
     // Set up event listeners
     function setupEventListeners() {
-        // Photo capture buttons
+        // Photo capture button
         cameraBtn.addEventListener('click', handleCameraClick);
-        galleryBtn.addEventListener('click', handleGalleryClick);
         cameraInput.addEventListener('change', handlePhotoSelect);
-        galleryInput.addEventListener('change', handlePhotoSelect);
         
         // Clear and zoom buttons
         clearBtn.addEventListener('click', clearLocation);
@@ -83,30 +79,7 @@
 
     // Handle camera button click
     function handleCameraClick() {
-        // Check if camera is supported
-        if (isCameraSupported()) {
-            cameraInput.click();
-        } else {
-            // Fall back to gallery selection
-            galleryInput.click();
-        }
-    }
-
-    // Handle gallery button click
-    function handleGalleryClick() {
-        galleryInput.click();
-    }
-
-    // Check if camera capture is supported
-    function isCameraSupported() {
-        // Check for MediaDevices API support
-        const hasMediaDevices = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
-        // Check for capture attribute support (mobile browsers)
-        const input = document.createElement('input');
-        input.setAttribute('capture', 'environment');
-        const hasCapture = input.capture !== undefined;
-        
-        return hasMediaDevices || hasCapture;
+        cameraInput.click();
     }
 
     // Load saved location from localStorage
@@ -118,18 +91,18 @@
                 if (data.photo) {
                     displaySavedLocation(data);
                 } else {
-                    showInputForm();
+                    hideSavedLocation();
                 }
             } else {
-                showInputForm();
+                hideSavedLocation();
             }
         } catch (e) {
             console.error('Error loading saved location:', e);
-            showInputForm();
+            hideSavedLocation();
         }
     }
 
-    // Display saved location
+    // Display saved location (input form stays visible)
     function displaySavedLocation(data) {
         savedPhoto.src = data.photo;
         
@@ -139,33 +112,30 @@
 
         savedLocationSection.classList.remove('hidden');
         elapsedTimeSection.classList.remove('hidden');
-        inputFormSection.classList.add('hidden');
+        // Input form always stays visible - don't hide it
 
         // Start elapsed time updates
         startElapsedTimeUpdates(data.timestamp);
     }
 
-    // Show input form (hide saved location)
-    function showInputForm() {
+    // Hide saved location section (when no photo exists)
+    function hideSavedLocation() {
         savedLocationSection.classList.add('hidden');
         elapsedTimeSection.classList.add('hidden');
-        inputFormSection.classList.remove('hidden');
         cameraInput.value = '';
-        galleryInput.value = '';
 
         // Stop elapsed time updates
         stopElapsedTimeUpdates();
     }
 
-    // Handle photo selection - auto-save immediately
+    // Handle photo selection - auto-save immediately (replaces existing photo)
     function handlePhotoSelect(e) {
         const file = e.target.files[0];
         if (!file) return;
 
         if (!file.type.startsWith('image/')) {
-            alert('이미지 파일만 업로드할 수 있습니다.');
+            alert('Only image files can be uploaded.');
             cameraInput.value = '';
-            galleryInput.value = '';
             return;
         }
 
@@ -177,13 +147,14 @@
             };
 
             try {
+                // This will replace any existing photo
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
                 displaySavedLocation(data);
             } catch (e) {
                 if (e.name === 'QuotaExceededError') {
-                    alert('저장 공간이 부족합니다. 브라우저 캐시를 정리해 주세요.');
+                    alert('Storage space is full. Please clear your browser cache.');
                 } else {
-                    alert('저장 실패: ' + e.message);
+                    alert('Failed to save: ' + e.message);
                 }
             }
         });
@@ -222,12 +193,12 @@
 
     // Clear saved location
     function clearLocation() {
-        if (confirm('저장된 주차 위치를 삭제하시겠습니까?')) {
+        if (confirm('Are you sure you want to delete the saved parking location?')) {
             try {
                 localStorage.removeItem(STORAGE_KEY);
-                showInputForm();
+                hideSavedLocation();
             } catch (e) {
-                alert('삭제 실패.');
+                alert('Failed to delete.');
             }
         }
     }
@@ -258,7 +229,7 @@
     function updateElapsedTime(timestamp) {
         const parkedDate = new Date(timestamp);
         const now = new Date();
-        const diffMs = now - parkedDate;
+        const diffMs = Math.max(0, now - parkedDate);
 
         // Calculate hours, minutes, seconds
         const hours = Math.floor(diffMs / 3600000);
@@ -295,13 +266,13 @@
 
     // Format parked at time for display
     function formatParkedAtTime(date) {
-        return date.toLocaleString('ko-KR', {
+        return 'Parked at ' + date.toLocaleString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
             hour: '2-digit',
             minute: '2-digit'
-        }) + ' 에 주차';
+        });
     }
 
     // Open help modal
