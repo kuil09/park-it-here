@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Park It Here - 주차 위치 기록</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚗 Park It Here</h1>
+            <p class="subtitle">주차 위치를 간편하게 기록하세요</p>
+        </header>
+
+        <main>
+            <!-- Saved Location Display -->
+            <section id="saved-location" class="card hidden">
+                <h2>저장된 주차 위치</h2>
+                <div id="location-display">
+                    <div id="photo-preview-container">
+                        <img id="saved-photo" alt="주차 위치 사진" />
+                    </div>
+                    <p id="location-time" class="time-stamp"></p>
+                </div>
+                <button id="clear-btn" class="btn btn-danger">위치 삭제</button>
+            </section>
+
+            <!-- Input Form -->
+            <section id="input-form" class="card">
+                <h2>주차 위치 사진 촬영</h2>
+                <form id="parking-form">
+                    <div class="form-group">
+                        <label for="photo-input">📸 사진을 촬영하세요</label>
+                        <input 
+                            type="file" 
+                            id="photo-input" 
+                            accept="image/*"
+                            capture="environment"
+                            required
+                        />
+                        <div id="photo-preview" class="hidden">
+                            <img id="preview-img" alt="미리보기" />
+                            <button type="button" id="remove-photo" class="btn btn-small">사진 제거</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">저장하기</button>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <p>📱 데이터는 이 기기에만 저장됩니다</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
