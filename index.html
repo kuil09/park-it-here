@@ -1,37 +1,37 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Park It Here - 주차 위치 기록</title>
+    <title>Park It Here - Save Your Parking Location</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>🚗 Park It Here</h1>
-            <p class="subtitle">주차 위치를 간편하게 기록하세요</p>
+            <p class="subtitle">Easily save your parking location</p>
         </header>
 
         <main>
             <!-- Saved Location Display -->
             <section id="saved-location" class="card hidden">
-                <h2>저장된 주차 위치</h2>
+                <h2>Saved Parking Location</h2>
                 <div id="location-display">
                     <div id="photo-preview-container">
-                        <img id="saved-photo" alt="주차 위치 사진" />
+                        <img id="saved-photo" alt="Parking location photo" />
                     </div>
                     <p id="location-time" class="time-stamp"></p>
                 </div>
-                <button id="clear-btn" class="btn btn-danger">위치 삭제</button>
+                <button id="clear-btn" class="btn btn-danger">Delete Location</button>
             </section>
 
             <!-- Input Form -->
             <section id="input-form" class="card">
-                <h2>주차 위치 사진 촬영</h2>
+                <h2>Take Parking Location Photo</h2>
                 <form id="parking-form">
                     <div class="form-group">
-                        <label for="photo-input">📸 사진을 촬영하세요</label>
+                        <label for="photo-input">📸 Take a photo</label>
                         <input 
                             type="file" 
                             id="photo-input" 
@@ -40,17 +40,17 @@
                             required
                         />
                         <div id="photo-preview" class="hidden">
-                            <img id="preview-img" alt="미리보기" />
-                            <button type="button" id="remove-photo" class="btn btn-small">사진 제거</button>
+                            <img id="preview-img" alt="Preview" />
+                            <button type="button" id="remove-photo" class="btn btn-small">Remove Photo</button>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">저장하기</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </section>
         </main>
 
         <footer>
-            <p>📱 데이터는 이 기기에만 저장됩니다</p>
+            <p>📱 Data is stored only on this device</p>
         </footer>
     </div>
 

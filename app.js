@@ -76,7 +76,7 @@
         e.preventDefault();
 
         if (!currentPhotoData) {
-            alert('주차 위치 사진을 촬영해주세요.');
+            alert('Please take a photo of your parking location.');
             return;
         }
 
@@ -90,9 +90,9 @@
             displaySavedLocation(data);
         } catch (e) {
             if (e.name === 'QuotaExceededError') {
-                alert('저장 공간이 부족합니다. 브라우저 캐시를 정리해주세요.');
+                alert('Storage space is full. Please clear your browser cache.');
             } else {
-                alert('저장에 실패했습니다: ' + e.message);
+                alert('Failed to save: ' + e.message);
             }
         }
     }
@@ -103,7 +103,7 @@
         if (!file) return;
 
         if (!file.type.startsWith('image/')) {
-            alert('이미지 파일만 업로드할 수 있습니다.');
+            alert('Only image files can be uploaded.');
             photoInput.value = '';
             return;
         }
@@ -157,12 +157,12 @@
 
     // Clear saved location
     function clearLocation() {
-        if (confirm('저장된 주차 위치를 삭제하시겠습니까?')) {
+        if (confirm('Are you sure you want to delete the saved parking location?')) {
             try {
                 localStorage.removeItem(STORAGE_KEY);
                 showInputForm();
             } catch (e) {
-                alert('삭제에 실패했습니다.');
+                alert('Failed to delete.');
             }
         }
     }
@@ -186,18 +186,18 @@
 
         let relativeTime;
         if (diffMins < 1) {
-            relativeTime = '방금 전';
+            relativeTime = 'just now';
         } else if (diffMins < 60) {
-            relativeTime = `${diffMins}분 전`;
+            relativeTime = `${diffMins} min ago`;
         } else if (diffHours < 24) {
-            relativeTime = `${diffHours}시간 전`;
+            relativeTime = `${diffHours} hr ago`;
         } else if (diffDays < 7) {
-            relativeTime = `${diffDays}일 전`;
+            relativeTime = `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
         } else {
-            relativeTime = date.toLocaleDateString('ko-KR');
+            relativeTime = date.toLocaleDateString('en-US');
         }
 
-        const timeStr = date.toLocaleString('ko-KR', {
+        const timeStr = date.toLocaleString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',

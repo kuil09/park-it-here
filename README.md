@@ -1,38 +1,38 @@
 # 🚗 Park It Here
 
-**주차 위치를 사진으로 간편하게 기록하세요!**
+**Easily save your parking location with a photo!**
 
-복잡한 쇼핑몰이나 대형 아파트 단지에서 주차 위치를 잊어버리지 않도록 도와주는 초경량 웹 서비스입니다.
+A lightweight web service that helps you remember where you parked in complex shopping malls or large apartment complexes.
 
-## ✨ 주요 기능
+## ✨ Key Features
 
-- 📸 **사진 촬영**: 주차 위치를 사진으로 바로 기록
-- ⏰ **타임스탬프**: 저장 시간 자동 기록 및 경과 시간 표시
-- 💾 **로컬 저장소**: 브라우저 Local Storage를 활용한 데이터 보관
+- 📸 **Photo Capture**: Record your parking location with a photo
+- ⏰ **Timestamp**: Auto-records save time with elapsed time display
+- 💾 **Local Storage**: Data stored using browser Local Storage
 
-## 🎯 특징
+## 🎯 Features
 
-| 특징 | 설명 |
-|------|------|
-| **Serverless** | 별도의 백엔드 서버가 필요 없습니다 |
-| **No Login** | 회원가입/로그인 없이 바로 사용 가능 |
-| **Client-Side** | 데이터가 사용자 기기에만 저장되어 프라이버시 보장 |
-| **Mobile-First** | 모바일 환경에 최적화된 반응형 디자인 |
-| **PWA Ready** | 모바일 홈 화면에 추가하여 앱처럼 사용 가능 |
+| Feature | Description |
+|---------|-------------|
+| **Serverless** | No backend server required |
+| **No Login** | Use immediately without signup/login |
+| **Client-Side** | Data stored only on your device for privacy |
+| **Mobile-First** | Responsive design optimized for mobile |
+| **PWA Ready** | Add to home screen and use like an app |
 
-## 📱 사용 방법
+## 📱 How to Use
 
-1. **촬영하기**: 주차 위치 사진 촬영
-2. **저장하기**: "저장하기" 버튼 클릭
-3. **확인하기**: 페이지를 다시 열면 저장된 사진 표시
-4. **삭제하기**: 더 이상 필요 없으면 "위치 삭제" 버튼 클릭
+1. **Take Photo**: Capture your parking location
+2. **Save**: Click the "Save" button
+3. **View**: Reopen the page to see saved photo
+4. **Delete**: Click "Delete Location" when no longer needed
 
-## 🚀 시작하기
+## 🚀 Getting Started
 
-### 직접 열기
-`index.html` 파일을 웹 브라우저에서 직접 열어 사용할 수 있습니다.
+### Direct Open
+Open the `index.html` file directly in your web browser.
 
-### 로컬 서버로 실행
+### Run with Local Server
 ```bash
 # Python 3
 python -m http.server 8080
@@ -40,36 +40,36 @@ python -m http.server 8080
 # Node.js (npx)
 npx serve
 
-# 또는 다른 정적 파일 서버 사용
+# Or use any other static file server
 ```
 
-브라우저에서 `http://localhost:8080` 접속
+Access `http://localhost:8080` in your browser
 
-## 📁 프로젝트 구조
+## 📁 Project Structure
 
 ```
 park-it-here/
-├── index.html    # 메인 HTML 페이지
-├── styles.css    # 스타일시트
-├── app.js        # JavaScript 로직
-├── README.md     # 프로젝트 설명
-└── LICENSE       # MIT 라이선스
+├── index.html    # Main HTML page
+├── styles.css    # Stylesheet
+├── app.js        # JavaScript logic
+├── README.md     # Project description
+└── LICENSE       # MIT License
 ```
 
-## ⚠️ 주의사항
+## ⚠️ Notes
 
-- 데이터는 **현재 기기/브라우저에만** 저장됩니다
-- 브라우저 캐시를 삭제하면 데이터가 사라집니다
-- 다른 기기와 동기화되지 않습니다
+- Data is stored **only on the current device/browser**
+- Clearing browser cache will delete the data
+- No sync between devices
 
-## 🛠️ 기술 스택
+## 🛠️ Tech Stack
 
 - HTML5
 - CSS3 (Flexbox, CSS Variables)
 - Vanilla JavaScript (ES6+)
 - Web Storage API (localStorage)
-- File API (이미지 처리)
+- File API (image processing)
 
-## 📄 라이선스
+## 📄 License
 
-MIT License - 자유롭게 사용, 수정, 배포할 수 있습니다.
+MIT License - Free to use, modify, and distribute.
