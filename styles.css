@@ -362,35 +362,6 @@ footer {
     background-color: var(--secondary-hover);
 }
 
-/* Zoom Button Overlay */
-.btn-zoom-overlay {
-    position: absolute;
-    bottom: 8px;
-    left: 8px;
-    width: 36px;
-    height: 36px;
-    border: none;
-    border-radius: 50%;
-    background-color: rgba(74, 144, 217, 0.9);
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s, transform 0.1s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.btn-zoom-overlay:hover {
-    background-color: rgba(53, 122, 189, 1);
-    transform: scale(1.1);
-}
-
-.btn-zoom-overlay:active {
-    transform: scale(0.95);
-}
-
 /* Elapsed Time Display */
 .elapsed-time-card {
     background: linear-gradient(135deg, var(--primary-color) 0%, #357ABD 100%);
@@ -542,26 +513,9 @@ footer {
 
 .help-footer {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
+    justify-content: center;
     padding-top: 16px;
     border-top: 1px solid var(--border-color);
-}
-
-.dont-show-again {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-}
-
-.dont-show-again input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
 }
 
 /* Zoom Modal Styles */
