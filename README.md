@@ -11,7 +11,7 @@ To avoid cluttering my photo library and cloud storage, I made a tool where the 
 With **Park It Here**:
 
 - You can **save your parking location with a simple photo from the browser**
-- **GPS coordinates are captured** and displayed on a Google Map
+- **GPS coordinates are captured** and displayed on OpenStreetMap (no API key required!)
 - The photo is stored **only in your browser's local storage**, not in the cloud
 - You don't install any apps — just open the website and **check where you parked**
 
@@ -21,7 +21,7 @@ With **Park It Here**:
 
 - 📸 **Save a parking photo** directly from your browser
 - 📍 **Capture GPS location** automatically with your photo
-- 🗺️ **View on Google Map** — see your exact parking spot with a marker
+- 🗺️ **View on OpenStreetMap** — see your exact parking spot with a marker (no API key needed!)
 - ⏱️ **Track elapsed time** since you parked, with a prominent real-time display
 - 🔍 **Zoom and enlarge photos** to see details like license plates and location markers
 - 💾 **Keep it local** — the data lives only in your browser's local storage
@@ -49,15 +49,9 @@ Data never leaves your device, and there's no login, account, or sync.
 
 ---
 
-## 🗺️ Google Maps Integration
+## 🗺️ Map Integration
 
-To enable the Google Maps feature:
-
-1. Get a Google Maps API key from the [Google Cloud Console](https://console.cloud.google.com/)
-2. Enable the "Maps JavaScript API" for your project
-3. Replace `YOUR_API_KEY` in `index.html` with your actual API key
-
-Note: The app works without a valid API key, but the map will show a "For development purposes only" watermark.
+The app uses **OpenStreetMap with Leaflet.js** for map display. This is completely free and **does not require any API key** to use.
 
 ---
 

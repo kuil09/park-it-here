@@ -39,7 +39,7 @@
     // Timer reference
     let elapsedTimeInterval = null;
     
-    // Google Map reference
+    // Leaflet Map reference (OpenStreetMap - no API key required)
     let map = null;
     let marker = null;
 
@@ -181,81 +181,47 @@
         if (locationCoordsDisplay) {
             locationCoordsDisplay.classList.add('hidden');
         }
-        map = null;
+        destroyMap();
+    }
+    
+    // Destroy existing map instance
+    function destroyMap() {
+        if (map) {
+            map.remove();
+            map = null;
+        }
         marker = null;
     }
     
-    // Track if Google Maps API is loaded
-    let googleMapsLoaded = false;
-    let pendingMapDisplay = null;
-    
-    // Load Google Maps API dynamically
-    function loadGoogleMapsAPI() {
-        if (googleMapsLoaded || document.querySelector('script[src*="maps.googleapis.com"]')) {
-            return;
-        }
-        
-        const script = document.createElement('script');
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initGoogleMaps';
-        script.async = true;
-        script.defer = true;
-        document.head.appendChild(script);
-    }
-    
-    // Callback when Google Maps API is loaded
-    window.initGoogleMaps = function() {
-        googleMapsLoaded = true;
-        // If there's a pending map display, execute it now
-        if (pendingMapDisplay) {
-            displayLocationOnMap(pendingMapDisplay.lat, pendingMapDisplay.lng);
-            pendingMapDisplay = null;
-        }
-    };
-    
-    // Display location on Google Map
+    // Display location on OpenStreetMap using Leaflet (no API key required)
     function displayLocationOnMap(lat, lng) {
         if (!mapContainer) {
             return;
         }
         
-        // Check if Google Maps API is available
-        if (typeof google === 'undefined' || !google.maps) {
-            // Store pending display and try to load the API
-            pendingMapDisplay = { lat: lat, lng: lng };
-            loadGoogleMapsAPI();
-            console.log('Google Maps API loading...');
+        // Check if Leaflet is available
+        if (typeof L === 'undefined') {
+            console.log('Leaflet not available');
             return;
         }
         
-        const position = { lat: lat, lng: lng };
+        // Remove existing map if any
+        destroyMap();
         
-        // Initialize map if not already done
-        if (!map) {
-            map = new google.maps.Map(mapContainer, {
-                center: position,
-                zoom: 17,
-                mapTypeId: 'roadmap',
-                disableDefaultUI: false,
-                zoomControl: true,
-                mapTypeControl: false,
-                streetViewControl: false,
-                fullscreenControl: true
-            });
-        } else {
-            map.setCenter(position);
-        }
+        // Initialize new map
+        map = L.map(mapContainer).setView([lat, lng], 17);
         
-        // Add or update marker
-        if (marker) {
-            marker.setPosition(position);
-        } else {
-            marker = new google.maps.Marker({
-                position: position,
-                map: map,
-                title: 'Parking Location',
-                animation: google.maps.Animation.DROP
-            });
-        }
+        // Add OpenStreetMap tiles (free, no API key required)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        
+        // Add marker
+        marker = L.marker([lat, lng])
+            .addTo(map)
+            .bindPopup('🚗 Parking Location')
+            .openPopup();
     }
     
     // Get current geolocation
