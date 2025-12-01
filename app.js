@@ -243,25 +243,6 @@
             String(seconds).padStart(2, '0');
 
         elapsedTimeDisplay.textContent = formattedTime;
-
-        // Update color based on time elapsed
-        updateTimeColor(hours, minutes);
-    }
-
-    // Update elapsed time card color based on duration
-    function updateTimeColor(hours, minutes) {
-        const totalMinutes = hours * 60 + minutes;
-
-        elapsedTimeSection.classList.remove('time-warning', 'time-danger');
-
-        if (totalMinutes >= 120) {
-            // Over 2 hours - danger (red)
-            elapsedTimeSection.classList.add('time-danger');
-        } else if (totalMinutes >= 90) {
-            // Over 1.5 hours - warning (orange)
-            elapsedTimeSection.classList.add('time-warning');
-        }
-        // Under 1.5 hours - default (blue/green)
     }
 
     // Format parked at time for display

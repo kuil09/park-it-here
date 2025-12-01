@@ -411,14 +411,6 @@ footer {
     margin-top: 8px;
 }
 
-.elapsed-time-card.time-warning {
-    background: linear-gradient(135deg, var(--warning-color) 0%, #E67E22 100%);
-}
-
-.elapsed-time-card.time-danger {
-    background: linear-gradient(135deg, var(--danger-color) 0%, #C0392B 100%);
-}
-
 /* Modal Styles */
 .modal {
     position: fixed;

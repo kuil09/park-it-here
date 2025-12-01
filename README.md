@@ -34,9 +34,7 @@ Data never leaves your device, and there's no login, account, or sync.
 2. **Take a photo** of your parking location using the "📸 Take Photo" button.
    - The photo is saved directly in the browser, not in your camera roll.
 3. The app will **save and show your parking photo** automatically.
-4. **Check elapsed time** displayed prominently at the top.
-   - Over 90 minutes: Orange warning color
-   - Over 2 hours: Red danger color
+4. **Check elapsed time** displayed prominently at the top in HH:MM:SS format.
 5. **Tap the photo** or the zoom icon to see it in full size.
 6. **Take a new photo** anytime — it will replace the existing one.
 7. **Delete** when no longer needed using the ✕ button on the photo.
