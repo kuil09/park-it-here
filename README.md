@@ -25,7 +25,6 @@ With **Park It Here**:
 - ⏱️ **Track elapsed time** since you parked, with a prominent real-time display
 - 🔍 **Zoom and enlarge photos** to see details like license plates and location markers
 - 💾 **Keep it local** — the data lives only in your browser's local storage
-- 🕐 **Auto cleanup** — photos are automatically deleted after 24 hours
 - 📖 **First-run guide** with option to hide on subsequent visits
 - 🔄 **Replace photos easily** — take a new photo anytime to update your saved location
 
@@ -79,7 +78,6 @@ You can add Park It Here to your home screen and use it like a lightweight app.
 
 - Your data is stored **only on the current device and browser**.
 - If you **clear your browser data/cache**, the saved parking photo will be deleted.
-- **Photos expire after 24 hours** and are automatically cleaned up.
 - There is **no sync between devices**.
 - The "How to Use" modal appears on first run and can be hidden with the "Don't show again" option.
 

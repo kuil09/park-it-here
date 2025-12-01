@@ -6,7 +6,6 @@
 
     const STORAGE_KEY = 'parkItHere_location';
     const HELP_SHOWN_KEY = 'parkItHere_helpShown';
-    const PHOTO_EXPIRY_HOURS = 24; // Photos expire after 24 hours
 
     // DOM Elements
     const savedLocationSection = document.getElementById('saved-location');
@@ -45,32 +44,9 @@
 
     // Initialize the app
     function init() {
-        cleanupExpiredPhotos();
         loadSavedLocation();
         setupEventListeners();
         checkFirstRunGuide();
-    }
-    
-    // Clean up expired photos based on PHOTO_EXPIRY_HOURS
-    function cleanupExpiredPhotos() {
-        try {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            if (saved) {
-                const data = JSON.parse(saved);
-                if (data.timestamp) {
-                    const photoTime = new Date(data.timestamp);
-                    const now = new Date();
-                    const hoursDiff = (now - photoTime) / (1000 * 60 * 60);
-                    
-                    if (hoursDiff > PHOTO_EXPIRY_HOURS) {
-                        localStorage.removeItem(STORAGE_KEY);
-                        console.log(`Expired photo cleaned up after ${Math.round(hoursDiff)} hours`);
-                    }
-                }
-            }
-        } catch (e) {
-            console.error('Error cleaning up expired photos:', e);
-        }
     }
 
     // Set up event listeners
