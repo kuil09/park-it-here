@@ -30,9 +30,17 @@
     const zoomOverlay = document.getElementById('zoom-overlay');
     const zoomCloseBtn = document.getElementById('zoom-close-btn');
     const zoomImage = document.getElementById('zoom-image');
+    
+    // Map Elements
+    const mapContainer = document.getElementById('map-container');
+    const locationCoordsDisplay = document.getElementById('location-coords');
 
     // Timer reference
     let elapsedTimeInterval = null;
+    
+    // Leaflet Map reference (OpenStreetMap - no API key required)
+    let map = null;
+    let marker = null;
 
     // Initialize the app
     function init() {
@@ -112,6 +120,20 @@
 
         // Start elapsed time updates
         startElapsedTimeUpdates(data.timestamp);
+        
+        // Display location coordinates and map if available
+        if (data.latitude && data.longitude) {
+            displayLocationOnMap(data.latitude, data.longitude);
+            if (locationCoordsDisplay) {
+                locationCoordsDisplay.textContent = `Location: ${data.latitude.toFixed(6)}, ${data.longitude.toFixed(6)}`;
+                locationCoordsDisplay.classList.remove('hidden');
+            }
+            if (mapContainer) {
+                mapContainer.classList.remove('hidden');
+            }
+        } else {
+            hideMap();
+        }
     }
 
     // Hide saved location section (when no photo exists)
@@ -122,6 +144,99 @@
 
         // Stop elapsed time updates
         stopElapsedTimeUpdates();
+        
+        // Hide map and coordinates
+        hideMap();
+    }
+    
+    // Hide map and location display
+    function hideMap() {
+        if (mapContainer) {
+            mapContainer.classList.add('hidden');
+        }
+        if (locationCoordsDisplay) {
+            locationCoordsDisplay.classList.add('hidden');
+        }
+        destroyMap();
+    }
+    
+    // Destroy existing map instance
+    function destroyMap() {
+        if (map) {
+            map.remove();
+            map = null;
+        }
+        marker = null;
+    }
+    
+    // Display location on OpenStreetMap using Leaflet (no API key required)
+    function displayLocationOnMap(lat, lng) {
+        if (!mapContainer) {
+            return;
+        }
+        
+        // Check if Leaflet is available
+        if (typeof L === 'undefined') {
+            console.log('Leaflet not available');
+            return;
+        }
+        
+        // Remove existing map if any
+        destroyMap();
+        
+        // Initialize new map
+        map = L.map(mapContainer).setView([lat, lng], 17);
+        
+        // Add OpenStreetMap tiles (free, no API key required)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        
+        // Add marker
+        marker = L.marker([lat, lng])
+            .addTo(map)
+            .bindPopup('🚗 Parking Location')
+            .openPopup();
+    }
+    
+    // Get current geolocation
+    function getCurrentLocation() {
+        return new Promise(function(resolve, reject) {
+            if (!navigator.geolocation) {
+                reject(new Error('Geolocation is not supported by this browser.'));
+                return;
+            }
+            
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    resolve({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    });
+                },
+                function(error) {
+                    let message = 'Unable to get location.';
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            message = 'Location permission denied. Photo will be saved without location.';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            message = 'Location unavailable. Photo will be saved without location.';
+                            break;
+                        case error.TIMEOUT:
+                            message = 'Location request timed out. Photo will be saved without location.';
+                            break;
+                    }
+                    reject(new Error(message));
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 60000
+                }
+            );
+        });
     }
 
     // Handle photo selection - auto-save immediately (replaces existing photo)
@@ -135,25 +250,50 @@
             return;
         }
 
-        // Resize and convert to base64, then save
+        // Show loading state
+        cameraBtn.disabled = true;
+        cameraBtn.textContent = '📍 Getting location...';
+
+        // Resize and convert to base64, then save with location
         resizeImage(file, 800, 600, function(dataUrl) {
             const data = {
                 timestamp: new Date().toISOString(),
                 photo: dataUrl
             };
 
-            try {
-                // This will replace any existing photo
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-                displaySavedLocation(data);
-            } catch (e) {
-                if (e.name === 'QuotaExceededError') {
-                    alert('Storage space is full. Please clear your browser cache.');
-                } else {
-                    alert('Failed to save: ' + e.message);
-                }
-            }
+            // Try to get geolocation
+            getCurrentLocation()
+                .then(function(coords) {
+                    data.latitude = coords.latitude;
+                    data.longitude = coords.longitude;
+                    savePhotoData(data);
+                })
+                .catch(function(error) {
+                    console.warn('Location error:', error.message);
+                    // Save without location data
+                    savePhotoData(data);
+                })
+                .finally(function() {
+                    // Reset button state
+                    cameraBtn.disabled = false;
+                    cameraBtn.textContent = '📸 Take Photo';
+                });
         });
+    }
+    
+    // Save photo data to localStorage
+    function savePhotoData(data) {
+        try {
+            // This will replace any existing photo
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            displaySavedLocation(data);
+        } catch (e) {
+            if (e.name === 'QuotaExceededError') {
+                alert('Storage space is full. Please clear your browser cache.');
+            } else {
+                alert('Failed to save: ' + e.message);
+            }
+        }
     }
 
     // Resize image to reduce storage size

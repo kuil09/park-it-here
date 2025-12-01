@@ -14,6 +14,8 @@
     <link rel="apple-touch-icon" href="public/icons/icon-192x192.png">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5186931636428768"
         crossorigin="anonymous"></script>
+    <!-- Leaflet CSS for OpenStreetMap (no API key required) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 <body>
     <div class="container">
@@ -45,6 +47,8 @@
                             <button type="button" id="clear-btn" class="btn-remove-overlay" aria-label="Delete">✕</button>
                         </div>
                     </div>
+                    <p id="location-coords" class="location-coords hidden"></p>
+                    <div id="map-container" class="map-container hidden"></div>
                 </div>
             </section>
 
@@ -85,12 +89,20 @@
                         <p>Capture your parking location with your camera. The photo is saved directly in the browser, not in your camera roll.</p>
                     </li>
                     <li>
+                        <strong>📍 Location Capture</strong>
+                        <p>Allow location access to save GPS coordinates with your photo. A map will show your exact parking spot.</p>
+                    </li>
+                    <li>
                         <strong>💾 Auto Save</strong>
                         <p>Your photo is automatically saved to your browser's local storage. It won't be uploaded to the cloud or saved to your camera roll.</p>
                     </li>
                     <li>
                         <strong>⏱️ Track Elapsed Time</strong>
                         <p>See how long it's been since you parked with the live timer display.</p>
+                    </li>
+                    <li>
+                        <strong>🗺️ Map View</strong>
+                        <p>If location was captured, see your parking spot on an interactive OpenStreetMap.</p>
                     </li>
                     <li>
                         <strong>🔍 Zoom Photo</strong>
@@ -142,6 +154,8 @@
         </div>
     </div>
 
+    <!-- Leaflet JS for OpenStreetMap (no API key required) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="app.js"></script>
 </body>
 </html>
