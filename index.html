@@ -45,6 +45,8 @@
                             <button type="button" id="clear-btn" class="btn-remove-overlay" aria-label="Delete">✕</button>
                         </div>
                     </div>
+                    <p id="location-coords" class="location-coords hidden"></p>
+                    <div id="map-container" class="map-container hidden"></div>
                 </div>
             </section>
 
@@ -85,6 +87,10 @@
                         <p>Capture your parking location with your camera. The photo is saved directly in the browser, not in your camera roll.</p>
                     </li>
                     <li>
+                        <strong>📍 Location Capture</strong>
+                        <p>Allow location access to save GPS coordinates with your photo. A map will show your exact parking spot.</p>
+                    </li>
+                    <li>
                         <strong>💾 Auto Save</strong>
                         <p>Your photo is automatically saved to your browser's local storage. It won't be uploaded to the cloud or saved to your camera roll.</p>
                     </li>
@@ -93,12 +99,20 @@
                         <p>See how long it's been since you parked with the live timer display.</p>
                     </li>
                     <li>
+                        <strong>🗺️ Map View</strong>
+                        <p>If location was captured, see your parking spot on an interactive Google Map.</p>
+                    </li>
+                    <li>
                         <strong>🔍 Zoom Photo</strong>
                         <p>Tap the photo to view it in full size.</p>
                     </li>
                     <li>
                         <strong>🗑️ Delete</strong>
                         <p>When you no longer need it, tap the ✕ button on the photo to delete it.</p>
+                    </li>
+                    <li>
+                        <strong>🕐 Auto Cleanup</strong>
+                        <p>Photos are automatically deleted after 24 hours to keep your storage clean.</p>
                     </li>
                 </ol>
                 
@@ -142,6 +156,8 @@
         </div>
     </div>
 
+    <!-- Google Maps API - Replace YOUR_API_KEY with actual key or leave as is for demo -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&loading=async" async defer></script>
     <script src="app.js"></script>
 </body>
 </html>
