@@ -18,8 +18,11 @@ With **Park It Here**:
 ## ✨ What you can do with Park It Here
 
 - 📸 **Save a parking photo** directly from your browser
-- ⏰ **See when you saved it**, with the time automatically recorded
+- ⏱️ **Track elapsed time** since you parked, with a prominent real-time display
+- 🔍 **Zoom and enlarge photos** to see details like license plates and location markers
 - 💾 **Keep it local** — the data lives only in your browser's local storage
+- 📖 **First-run guide** with option to hide on subsequent visits
+- 🔄 **Replace photos easily** — take a new photo anytime to update your saved location
 
 Data never leaves your device, and there's no login, account, or sync.
 
@@ -28,12 +31,14 @@ Data never leaves your device, and there's no login, account, or sync.
 ## 📱 How to use
 
 1. **Open the page** in your mobile or desktop browser.
-2. **Take a photo** of your parking location:
-   - Tap the camera button and take a photo with your device.
-3. The app will **save and show your parking photo** on the page.
-4. Next time you open the page in the same browser/device,
-   you'll **see your saved parking location** right away.
-5. When you no longer need it, tap the **"✕" (Delete Location)** button on the photo to remove it.
+2. **Take a photo** of your parking location using the "📸 Take Photo" button.
+   - The photo is saved directly in the browser, not in your camera roll.
+3. The app will **save and show your parking photo** automatically.
+4. **Check elapsed time** displayed prominently at the top in HH:MM:SS format.
+5. **Tap the photo** or the zoom icon to see it in full size.
+6. **Take a new photo** anytime — it will replace the existing one.
+7. **Delete** when no longer needed using the ✕ button on the photo.
+8. **View help** anytime by clicking the ? button in the top right corner.
 
 ---
 
@@ -62,6 +67,7 @@ You can add Park It Here to your home screen and use it like a lightweight app.
 - Your data is stored **only on the current device and browser**.
 - If you **clear your browser data/cache**, the saved parking photo will be deleted.
 - There is **no sync between devices**.
+- The "How to Use" modal appears on first run and can be hidden with the "Don't show again" option.
 
 ---
 
