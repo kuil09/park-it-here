@@ -64,7 +64,7 @@
                     
                     if (hoursDiff > PHOTO_EXPIRY_HOURS) {
                         localStorage.removeItem(STORAGE_KEY);
-                        console.log('Expired photo cleaned up after ' + Math.round(hoursDiff) + ' hours');
+                        console.log(`Expired photo cleaned up after ${Math.round(hoursDiff)} hours`);
                     }
                 }
             }
@@ -149,7 +149,7 @@
         if (data.latitude && data.longitude) {
             displayLocationOnMap(data.latitude, data.longitude);
             if (locationCoordsDisplay) {
-                locationCoordsDisplay.textContent = 'Location: ' + data.latitude.toFixed(6) + ', ' + data.longitude.toFixed(6);
+                locationCoordsDisplay.textContent = `Location: ${data.latitude.toFixed(6)}, ${data.longitude.toFixed(6)}`;
                 locationCoordsDisplay.classList.remove('hidden');
             }
             if (mapContainer) {
@@ -185,10 +185,45 @@
         marker = null;
     }
     
+    // Track if Google Maps API is loaded
+    let googleMapsLoaded = false;
+    let pendingMapDisplay = null;
+    
+    // Load Google Maps API dynamically
+    function loadGoogleMapsAPI() {
+        if (googleMapsLoaded || document.querySelector('script[src*="maps.googleapis.com"]')) {
+            return;
+        }
+        
+        const script = document.createElement('script');
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initGoogleMaps';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+    }
+    
+    // Callback when Google Maps API is loaded
+    window.initGoogleMaps = function() {
+        googleMapsLoaded = true;
+        // If there's a pending map display, execute it now
+        if (pendingMapDisplay) {
+            displayLocationOnMap(pendingMapDisplay.lat, pendingMapDisplay.lng);
+            pendingMapDisplay = null;
+        }
+    };
+    
     // Display location on Google Map
     function displayLocationOnMap(lat, lng) {
-        if (!mapContainer || typeof google === 'undefined' || !google.maps) {
-            console.log('Google Maps not available');
+        if (!mapContainer) {
+            return;
+        }
+        
+        // Check if Google Maps API is available
+        if (typeof google === 'undefined' || !google.maps) {
+            // Store pending display and try to load the API
+            pendingMapDisplay = { lat: lat, lng: lng };
+            loadGoogleMapsAPI();
+            console.log('Google Maps API loading...');
             return;
         }
         
