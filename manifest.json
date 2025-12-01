@@ -2,7 +2,7 @@
   "name": "Park It Here",
   "short_name": "Park It Here",
   "description": "Save parking photos locally — no camera roll or cloud storage needed",
-  "start_url": "/park-it-here/index.html",
+  "start_url": "/park-it-here",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4a90d9",
