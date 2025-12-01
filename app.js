@@ -15,7 +15,6 @@
     const parkedAtTime = document.getElementById('parked-at-time');
     const savedPhoto = document.getElementById('saved-photo');
     const clearBtn = document.getElementById('clear-btn');
-    const zoomBtn = document.getElementById('zoom-btn');
     const cameraBtn = document.getElementById('camera-btn');
     const cameraInput = document.getElementById('camera-input');
     
@@ -25,7 +24,6 @@
     const modalOverlay = document.getElementById('modal-overlay');
     const modalCloseBtn = document.getElementById('modal-close-btn');
     const helpCloseBtn = document.getElementById('help-close-btn');
-    const dontShowAgainCheckbox = document.getElementById('dont-show-again-checkbox');
     
     // Zoom Modal Elements
     const zoomModal = document.getElementById('zoom-modal');
@@ -49,24 +47,20 @@
         cameraBtn.addEventListener('click', handleCameraClick);
         cameraInput.addEventListener('change', handlePhotoSelect);
         
-        // Clear and zoom buttons
+        // Clear button and photo click to zoom
         clearBtn.addEventListener('click', clearLocation);
-        zoomBtn.addEventListener('click', openZoomModal);
         savedPhoto.addEventListener('click', openZoomModal);
         
         // Help modal
         helpBtn.addEventListener('click', openHelpModal);
         modalOverlay.addEventListener('click', closeHelpModal);
         modalCloseBtn.addEventListener('click', closeHelpModal);
-        helpCloseBtn.addEventListener('click', handleHelpClose);
+        helpCloseBtn.addEventListener('click', closeHelpModal);
         
         // Zoom modal
         zoomOverlay.addEventListener('click', closeZoomModal);
         zoomCloseBtn.addEventListener('click', closeZoomModal);
         zoomImage.addEventListener('click', toggleZoom);
-        
-        // Keyboard support for modals
-        document.addEventListener('keydown', handleKeyDown);
     }
 
     // Check and show first-run guide
@@ -74,6 +68,8 @@
         const helpShown = localStorage.getItem(HELP_SHOWN_KEY);
         if (!helpShown) {
             openHelpModal();
+            // Mark as shown so it won't appear automatically on next visit
+            localStorage.setItem(HELP_SHOWN_KEY, 'true');
         }
     }
 
@@ -268,14 +264,6 @@
         document.body.style.overflow = '';
     }
 
-    // Handle help close with "don't show again" option
-    function handleHelpClose() {
-        if (dontShowAgainCheckbox.checked) {
-            localStorage.setItem(HELP_SHOWN_KEY, 'true');
-        }
-        closeHelpModal();
-    }
-
     // Open zoom modal
     function openZoomModal() {
         zoomImage.src = savedPhoto.src;
@@ -294,18 +282,6 @@
     // Toggle zoom on image
     function toggleZoom() {
         zoomImage.classList.toggle('zoomed');
-    }
-
-    // Handle keyboard events for modals
-    function handleKeyDown(e) {
-        if (e.key === 'Escape') {
-            if (!helpModal.classList.contains('hidden')) {
-                closeHelpModal();
-            }
-            if (!zoomModal.classList.contains('hidden')) {
-                closeZoomModal();
-            }
-        }
     }
 
     // Initialize when DOM is ready

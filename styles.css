@@ -225,6 +225,17 @@ footer {
     font-size: 0.85rem;
 }
 
+.privacy-notice {
+    display: inline-block;
+    background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
 /* Photo wrapper with overlay button */
 .photo-wrapper {
     position: relative;
@@ -349,35 +360,6 @@ footer {
 
 .btn-secondary:hover {
     background-color: var(--secondary-hover);
-}
-
-/* Zoom Button Overlay */
-.btn-zoom-overlay {
-    position: absolute;
-    bottom: 8px;
-    left: 8px;
-    width: 36px;
-    height: 36px;
-    border: none;
-    border-radius: 50%;
-    background-color: rgba(74, 144, 217, 0.9);
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s, transform 0.1s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.btn-zoom-overlay:hover {
-    background-color: rgba(53, 122, 189, 1);
-    transform: scale(1.1);
-}
-
-.btn-zoom-overlay:active {
-    transform: scale(0.95);
 }
 
 /* Elapsed Time Display */
@@ -516,28 +498,24 @@ footer {
     line-height: 1.5;
 }
 
-.help-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
+/* Install Guide Section in Help Modal */
+.install-guide-section {
+    margin-top: 20px;
     padding-top: 16px;
     border-top: 1px solid var(--border-color);
 }
 
-.dont-show-again {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: var(--text-muted);
+.install-guide-section h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: var(--text-color);
 }
 
-.dont-show-again input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
+.help-footer {
+    display: flex;
+    justify-content: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
 }
 
 /* Zoom Modal Styles */
