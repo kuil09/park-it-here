@@ -202,3 +202,97 @@ footer {
         padding: 16px;
     }
 }
+
+/* Photo wrapper with overlay button */
+.photo-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.photo-wrapper img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+    display: block;
+}
+
+.btn-remove-overlay {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(231, 76, 60, 0.9);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, transform 0.1s, outline 0.1s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.btn-remove-overlay:focus {
+    outline: 2px solid var(--primary-color, #4A90D9);
+    background-color: rgba(192, 57, 43, 1);
+}
+
+.btn-remove-overlay:hover {
+    background-color: rgba(192, 57, 43, 1);
+    transform: scale(1.1);
+}
+
+.btn-remove-overlay:active {
+    transform: scale(0.95);
+}
+
+/* Install Guide Styles */
+.install-instructions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.install-option {
+    background: var(--bg-color, #F5F7FA);
+    border-radius: 8px;
+    padding: 12px 16px;
+}
+
+.install-option summary {
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 0;
+    list-style: none;
+}
+
+.install-option summary::-webkit-details-marker {
+    display: none;
+}
+
+.install-option summary::before {
+    content: "▶ ";
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.install-option[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.install-option ol {
+    margin-top: 12px;
+    margin-left: 24px;
+    color: var(--text-color, #2C3E50);
+}
+
+.install-option ol li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}

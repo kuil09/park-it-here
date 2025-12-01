@@ -42,14 +42,39 @@
                             required
                         />
                         <div id="photo-preview" class="hidden">
-                            <img id="preview-img" alt="Preview" />
-                            <button type="button" id="remove-photo" class="btn btn-small">Remove Photo</button>
+                            <div class="photo-wrapper">
+                                <img id="preview-img" alt="Preview" />
+                                <button type="button" id="remove-photo" class="btn-remove-overlay" aria-label="Remove Photo">✕</button>
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </section>
         </main>
+
+        <!-- Add to Home Screen Instructions -->
+        <section id="install-guide" class="card">
+            <h2>📲 Add to Home Screen</h2>
+            <div class="install-instructions">
+                <details class="install-option">
+                    <summary>🍎 iPhone / iPad (iOS)</summary>
+                    <ol>
+                        <li>Tap the <strong>Share</strong> button (square with arrow) at the bottom of Safari</li>
+                        <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
+                        <li>Tap <strong>"Add"</strong> in the top right corner</li>
+                    </ol>
+                </details>
+                <details class="install-option">
+                    <summary>🤖 Android</summary>
+                    <ol>
+                        <li>Tap the <strong>Menu</strong> button (three dots) in Chrome</li>
+                        <li>Tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong></li>
+                        <li>Tap <strong>"Add"</strong> to confirm</li>
+                    </ol>
+                </details>
+            </div>
+        </section>
 
         <footer>
             <p>📱 Data is stored only on this device</p>
