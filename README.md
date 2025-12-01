@@ -86,3 +86,14 @@ You can add Park It Here to your home screen and use it like a lightweight app.
 ## 📄 License
 
 MIT License - free to use, modify, and distribute.
+
+---
+
+## 🙏 Open Source Acknowledgments
+
+This project uses the following open source software:
+
+- **[Leaflet.js](https://leafletjs.com/)** - BSD 2-Clause License
+- **[OpenStreetMap](https://www.openstreetmap.org/)** - Open Database License (ODbL)
+
+For full license texts and attribution details, see [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md).
