@@ -225,6 +225,17 @@ footer {
     font-size: 0.85rem;
 }
 
+.privacy-notice {
+    display: inline-block;
+    background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
 /* Photo wrapper with overlay button */
 .photo-wrapper {
     position: relative;
@@ -514,6 +525,19 @@ footer {
     font-size: 0.9rem;
     color: var(--text-muted);
     line-height: 1.5;
+}
+
+/* Install Guide Section in Help Modal */
+.install-guide-section {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.install-guide-section h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: var(--text-color);
 }
 
 .help-footer {
