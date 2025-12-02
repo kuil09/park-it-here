@@ -79,7 +79,6 @@ You can add Park It Here to your home screen and use it like a lightweight app.
 - Your data is stored **only on the current device and browser**.
 - If you **clear your browser data/cache**, the saved parking photo will be deleted.
 - There is **no sync between devices**.
-- The "How to Use" modal appears on first run and can be hidden with the "Don't show again" option.
 
 ---
 
