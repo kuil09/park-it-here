@@ -30,6 +30,8 @@ With **Park It Here**:
 
 Data never leaves your device, and there's no login, account, or sync.
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](buymeacoffee.com/e3pbwto)
+
 ---
 
 ## 📱 How to use
